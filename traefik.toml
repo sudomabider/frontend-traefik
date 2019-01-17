@@ -1,0 +1,19 @@
+debug = true
+defaultEntryPoints = ["http", "https"]
+
+
+[api]
+[docker]
+watch = true
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+      [[entryPoints.https.tls.certificates]]
+      certFile = "/certs/_wildcard.local.devel.nz+2.pem"
+      keyFile = "/certs/_wildcard.local.devel.nz+2-key.pem"

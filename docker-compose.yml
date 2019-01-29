@@ -3,6 +3,13 @@ version: '3'
 services:
   traefik:
     image: traefik:alpine
+    logging:
+        driver: 'json-file'
+        options:
+            max-size: '1m'
+            max-file: '5'
+    networks:
+      bridge-frontend:
     ports:
       - 80:80
       - 443:443
@@ -12,8 +19,6 @@ services:
       - ./certs:/certs
       - //var/run/docker.sock:/var/run/docker.sock
 
-  test:
-    image: nginx:alpine
-    labels:
-      - traefik.frontend.rule=Host:test.local.devel.nz
-      - traefik.basic.port=80
+networks:
+  bridge-frontend:
+    external: true

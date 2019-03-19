@@ -5,6 +5,8 @@ defaultEntryPoints = ["http", "https"]
 [api]
 [docker]
 watch = true
+exposedByDefault = false
+network = "bridge-frontend"
 
 [entryPoints]
   [entryPoints.http]
